@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzf.dashboard.modules.share.mapper.ShareDateInformationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tzf.dashboard.modules.share.model.ShareDateInformation">
+        <result column="dm" property="dm" />
+        <result column="data_date" property="dataDate" />
+        <result column="agltsz" property="agltsz" />
+        <result column="zsz" property="zsz" />
+        <result column="zgb" property="zgb" />
+        <result column="ltag" property="ltag" />
+        <result column="gxl" property="gxl" />
+        <result column="jbmgsy" property="jbmgsy" />
+        <result column="jzc" property="jzc" />
+        <result column="jlr" property="jlr" />
+        <result column="yysr" property="yysr" />
+        <result column="zczj" property="zczj" />
+        <result column="mgzbgj" property="mgzbgj" />
+        <result column="mgjzc" property="mgjzc" />
+        <result column="mgjyxjl" property="mgjyxjl" />
+        <result column="mgwfplr" property="mgwfplr" />
+    </resultMap>
+
+</mapper>
