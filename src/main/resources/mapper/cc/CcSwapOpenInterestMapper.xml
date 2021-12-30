@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tzf.dashboard.modules.cc.mapper.CcSwapOpenInterestMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tzf.dashboard.modules.cc.model.CcSwapOpenInterest">
+        <id column="channel" property="channel" />
+        <result column="data_time" property="dataTime" />
+        <result column="inst_id" property="instId" />
+        <result column="inst_type" property="instType" />
+        <result column="oi" property="oi" />
+        <result column="oi_ccy" property="oiCcy" />
+        <result column="ts" property="ts" />
+    </resultMap>
+
+    <select id="getCCNewerData" resultType="com.tzf.dashboard.modules.cc.model.CcSwapOpenInterest">
+        SELECT
+            oi,oi_ccy,ts
+        FROM
+            cc_swap_open_interest
+        WHERE channel=#{channel} and inst_id=#{inst_id} and inst_type=#{inst_type} ORDER BY ts DESC LIMIT 1
+    </select>
+
+    <select id="getCCStockData" resultType="com.tzf.dashboard.modules.cc.model.CcSwapOpenInterest">
+        SELECT
+            oi,oi_ccy,ts
+        FROM
+            cc_swap_open_interest
+        WHERE channel=#{channel} and inst_id=#{inst_id} and inst_type=#{inst_type}
+    </select>
+</mapper>
