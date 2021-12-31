@@ -1,9 +1,11 @@
 package com.tzf.dashboard.modules.cc.controller;
 
 
+import cn.hutool.core.collection.CollUtil;
 import com.tzf.dashboard.common.api.CommonResult;
 import com.tzf.dashboard.modules.cc.model.CcSwapOpenInterest;
 import com.tzf.dashboard.modules.cc.service.CcSwapOpenInterestService;
+import com.tzf.dashboard.modules.ums.model.UmsRole;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -54,7 +57,15 @@ public class CcSwapOpenInterestController {
         List<CcSwapOpenInterest> ccSwapOpenInterests = ccSwapOpenInterestService.getCCStockData(channel,inst_id,inst_type);
         System.out.println(ccSwapOpenInterests.size());
         Map<String, Object> data = new HashMap<>();
-        data.put("stock_data",ccSwapOpenInterests);
+        if(CollUtil.isNotEmpty(ccSwapOpenInterests)){
+            List<Long> oi = ccSwapOpenInterests.stream().map(CcSwapOpenInterest::getOi).collect(Collectors.toList());
+            data.put("oi",oi);
+            List<Long> oi_ccy = ccSwapOpenInterests.stream().map(CcSwapOpenInterest::getOiCcy).collect(Collectors.toList());
+            data.put("oi_ccy",oi_ccy);
+            List<Long> ts = ccSwapOpenInterests.stream().map(CcSwapOpenInterest::getTs).collect(Collectors.toList());
+            data.put("ts",ts);
+        }
+        System.out.println(data.toString());
         if(!data.isEmpty()){
             return CommonResult.success(data);
         }else {
